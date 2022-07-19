@@ -1,0 +1,30 @@
+CREATE TABLE clothes (id INTEGER PRIMARY KEY, item TEXT, color TEXT, size TEXT, quantity INTEGER, price INTEGER);
+INSERT INTO clothes 
+VALUES 
+( 1, "Shirt", "black", "S",5, 20),
+( 2, "Jeans", "blue", "XL",5, 30),
+( 3, "Jacket", "green","S", 1, 75),
+( 4, "Sweater", "red", "M", 4, 25),
+( 5, "Tie", "black", "S", 3, 30),
+( 6, "Socks", "white", "S", 3, 20),
+( 7, "Skirt", "pink", "L", 2, 25),
+( 8, "Hoodie", "gray", "XL", 3, 30),
+( 9, "Blazer", "brown", "M", 2, 50),
+( 10, "Polo", "orange", "S", 4, 20),
+( 11, "Cardigan", "yellow", "L",1, 30),
+( 12, "boxers", "white", "S", 6, 10),
+( 13, "briefs", "blue", "S", 3, 10),
+( 14, "tank top", "white", "XL", 4, 10),
+( 15, "joggers", "maroon", "M", 2, 30)
+;
+
+--Displayed table with Items in Small, ordered by color and price.
+SELECT*FROM clothes
+WHERE size="S"
+ORDER BY color, price desc; 
+
+--Displayed table with items items sorted by price, lowest to highest.
+SELECT*FROM clothes
+ORDER BY price asc;
+
+
