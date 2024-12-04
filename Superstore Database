@@ -1,0 +1,97 @@
+CREATE TABLE superstore (
+    item_id INTEGER PRIMARY KEY,
+    item_name TEXT,
+    category TEXT,
+    price DECIMAL(10, 2),
+    stock_quantity INTEGER,
+    average_rating DECIMAL(3, 2)
+);
+
+INSERT INTO superstore (item_id, item_name, category, price, stock_quantity, average_rating)
+VALUES
+    (1, 'Stainless Steel Cookware Set', 'Kitchen Supplies', 89.99, 50, 4.6),
+    (2, 'Memory Foam Mattress', 'Furnishings', 499.99, 30, 4.8),
+    (3, 'Smart LED TV', 'Electronics', 549.00, 20, 4.5),
+    (4, 'Robot Vacuum Cleaner', 'Appliances', 199.50, 40, 4.3),
+    (5, 'Wireless Bluetooth Speaker', 'Electronics', 39.99, 60, 4.2),
+    (6, 'Non-Stick Baking Set', 'Kitchen Supplies', 29.95, 80, 4.4),
+    (7, 'Cotton Bedding Set', 'Furnishings', 89.00, 25, 4.7),
+    (8, 'Smart Home Security Camera', 'Electronics', 79.95, 15, 4.1),
+    (9, 'Air Purifier', 'Appliances', 129.50, 35, 4.6),
+    (10, 'Premium Coffee Maker', 'Kitchen Supplies', 79.99, 50, 4.9),
+    (11, 'Ergonomic Office Chair', 'Furnishings', 189.00, 20, 4.5),
+    (12, 'Wireless Earbuds', 'Electronics', 49.99, 75, 4.3),
+    (13, 'Slow Cooker', 'Appliances', 49.95, 30, 4.7),
+    (14, 'Cutlery Set', 'Kitchen Supplies', 34.50, 40, 4.4),
+    (15, 'Cozy Throw Blanket', 'Furnishings', 24.99, 100, 4.2);
+
+#For this project, I used SQL to query the Superstore database to get information about items sold at the store and their prices. 
+
+-- Query # 1 All items from table
+SELECT * 
+FROM superstore;
+
+-- Query #2 Write a SQL query that orders the items by price.
+SELECT *
+FROM superstore 
+ORDER BY price;
+
+-- Query #3 SQL query that will show a statistic about the item prices, like a sum grouped by category.
+SELECT SUM(price), category
+FROM superstore
+GROUP BY category;
+
+-- Query #4 SQL query that will show a statistic about the item prices, like a avg of all items available.
+SELECT AVG(price) AS average_price
+FROM superstore;
+
+-- Query #5 SQL query that will show a statistic about the item prices, like max. Item that is the most expensive.
+SELECT item_name AS Most_Expensive_Item, price
+FROM superstore
+WHERE price = (SELECT MAX(price) FROM superstore);
+
+-- Query #6 SQL query that will show a statistic about the item prices, like a min. Item that is the least expensive.
+SELECT item_name AS Least_Expensive_Item, price 
+FROM superstore
+WHERE price = (SELECT MIN(price) FROM superstore);
+
+-- Query #7 SQL query that will show a statistic about how many items in inventory.
+
+SELECT SUM(stock_quantity)
+FROM superstore;
+
+-- Query #8 SQL query about how many different products offered.
+SELECT COUNT(item_name) AS Items_Offered
+FROM superstore;
+
+-- Query #9 SQL query that will show a statistice about the avg rating for all items offered. 
+
+SELECT AVG(average_rating) AS Average_Rating
+FROM superstore;
+
+-- Query #10 All items that are classified as 'Kitchen Supplies' in alphabetical order.
+SELECT * 
+FROM superstore
+WHERE category = "Kitchen Supplies"
+ORDER BY item_name;
+
+-- Query #11 Average price of all items classifed as 'Electronics'.
+SELECT AVG(price)
+FROM superstore
+WHERE category = "Electronics";
+
+-- Query #12 How many products offered that are classified as 'Furnishings'. 
+SELECT COUNT(item_name)
+FROM superstore
+WHERE category = "Furnishings";
+
+-- Query #13 Items offered that are at least $100.00 and ordered from most to least expensive.
+SELECT category, item_name, price
+FROM superstore 
+WHERE price >= 100.00
+ORDER by price DESC;
+
+-- Query #14 Number of items on hand that are categorized as 'Kitchen Supplies'.
+SELECT SUM(stock_quantity)
+FROM superstore
+WHERE category = "Kitchen Supplies";
