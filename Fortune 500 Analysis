@@ -61,23 +61,28 @@ VALUES
 
 -- #1 Query all
 SELECT * 
-FROM fortune_companies;
+FROM fortune_companies
+;
 
 -- #2 What are the averages for each revenue, employees, paid_time_off_days, maternity_leave_weeks, and avg_employee_tenure?
 SELECT AVG(revenue), AVG(employees), AVG(paid_time_off_days), AVG(maternity_leave_weeks), AVG(avg_employee_tenure)
-FROM fortune_companies;
+FROM fortune_companies
+;
 
 -- #3 What are the max values for each revenue, employees, paid_time_off_days, maternity_leave_weeks, avg_employee_tenure?
 SELECT MAX(revenue), MAX(employees), MAX(paid_time_off_days), MAX(maternity_leave_weeks), MAX(avg_employee_tenure)
-FROM fortune_companies;
+FROM fortune_companies
+;
 
 -- #4 What industry has the most companies listed on the Fortune 500?
 SELECT MAX(industry) 
-FROM fortune_companies;
+FROM fortune_companies
+;
 
 -- #5 What are the least values for each revenue, employees, paid_time_off_days, maternity_leave_weeks, avg_employee_tenure?
 SELECT MIN(revenue), MIN(employees), MIN(paid_time_off_days), MIN(maternity_leave_weeks), MIN(avg_employee_tenure)
-from fortune_companies;
+from fortune_companies
+;
 
 -- #6 What are the companies that have healthcare benefits, have at least 18 paid_time_off_days, AND have at least 10 maternity_leave_weeks OR avg_employee_tenure is at least 6 years?
 SELECT *
@@ -111,39 +116,44 @@ SELECT industry, SUM(employees)AS industry_employees, ROUND(revenue, 1) AS reven
 FROM fortune_companies
 GROUP BY industry
 HAVING revenue_per_billion>=150.00
-ORDER BY revenue_per_billion desc;
+ORDER BY revenue_per_billion desc
+;
 
 -- #10 What are the industries and how many are in each that generate at least 150 billion in revenue sorted by the most employees? 
 SELECT industry, SUM(employees) AS industry_employees, ROUND(revenue, 1) AS revenue_per_billion 
 FROM fortune_companies
 GROUP BY industry
 HAVING revenue>=150.00
-ORDER BY industry_employees desc;
+ORDER BY industry_employees desc
+;
 
 -- #11 What is the average tenure for employees within the Retail industry?
 SELECT industry, 
 ROUND (AVG(avg_employee_tenure), 1)AS avg_tenure
 FROM fortune_companies
-WHERE industry='Retail';
+WHERE industry='Retail'
+;
 
 -- #12 What are the names of the companies and industries they are in that are on the Fortune 500 that do not offer healthcare benefits
 SELECT company_name, industry
 FROM fortune_companies
-WHERE healthcare_benefits=0;
+WHERE healthcare_benefits=0
+;
 
 -- #13 How many companies, grouped by industry, do not offer healthcare benefits they are listed on the Fortune 500?
 SELECT industry, COUNT(company_name) AS number_of_companies_with_no_health_benefits_per_industry
 FROM fortune_companies
 WHERE healthcare_benefits=0
-GROUP BY industry;
+GROUP BY industry
+;
 
 -- #14 What are the companies that are in 'Technology', 'Healthcare', or 'Finance' that offer healthcare_benefits in order by industry?
 SELECT * 
 FROM fortune_companies
 WHERE industry IN ('Technology', 'Healthcare', 'Finance')
 AND healthcare_benefits=1
-ORDER BY industry;
-
+ORDER BY industry
+;
 
 
 
