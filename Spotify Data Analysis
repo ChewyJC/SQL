@@ -176,3 +176,25 @@ FROM (
     LIMIT 3
 ) AS top_chill_tracks
 ;
+/*Calculate the average popularity for the artists in the Spotify data table. Then, for every artist with an average popularity of 90 or above, show their name, their average popularity, and label them as a “Top Star”.*/
+ 
+WITH tempTable AS (
+SELECT s.artist_name,
+AVG(s.popularity) AS average_popularity
+FROM SpotifyData AS s
+GROUP BY s.artist_name
+)
+
+SELECT artist_name, average_popularity, 'Top Star' AS tag
+FROM tempTable
+WHERE average_popularity >=90
+;
+
+/*Calculate the average popularity for the artists in the Spotify data table. Then, for every artist with an average popularity of 90 or above, show their name, their average popularity, and label them as a “Top Star”.*/
+/* Without the use of a CTE */
+
+SELECT artist_name, AVG(popularity) avg_popularity, 'Top Star' AS tag
+FROM BIT_DB.SpotifyData
+GROUP BY artist_name
+HAVING avg_popularity>=90
+;
